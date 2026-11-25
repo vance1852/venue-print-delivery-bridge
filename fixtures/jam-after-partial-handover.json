@@ -1,0 +1,229 @@
+{
+  "facts": {
+    "printers": [
+      {
+        "id": "p01",
+        "desk": "north",
+        "media": [
+          "A6"
+        ],
+        "layouts": [
+          "voucher"
+        ],
+        "known": true
+      },
+      {
+        "id": "p02",
+        "desk": "north",
+        "media": [
+          "tag"
+        ],
+        "layouts": [
+          "luggage"
+        ],
+        "known": true
+      },
+      {
+        "id": "p03",
+        "desk": "south",
+        "media": [
+          "A6"
+        ],
+        "layouts": [
+          "voucher"
+        ],
+        "known": true
+      },
+      {
+        "id": "p04",
+        "desk": "north",
+        "media": [
+          "A6"
+        ],
+        "layouts": [
+          "voucher"
+        ],
+        "known": false
+      }
+    ],
+    "registration_types": {
+      "tour": [
+        {
+          "kind": "voucher",
+          "media": "A6",
+          "per_member": 1
+        },
+        {
+          "kind": "luggage",
+          "media": "tag",
+          "per_member": 1
+        }
+      ]
+    }
+  },
+  "events": [
+    {
+      "at": 540,
+      "kind": "register",
+      "group": "rk8",
+      "type": "tour",
+      "count": 6,
+      "desk": "north",
+      "prefix": "N-40"
+    },
+    {
+      "at": 544,
+      "kind": "printer_status",
+      "device": "p01",
+      "local_id": "machine-873",
+      "state": "printed",
+      "range": [
+        1,
+        3
+      ]
+    },
+    {
+      "at": 545,
+      "kind": "scan",
+      "desk": "north",
+      "serial": "N-40-1",
+      "edition": 1
+    },
+    {
+      "at": 545,
+      "kind": "hand_over",
+      "desk": "north",
+      "serial": "N-40-1",
+      "edition": 1
+    },
+    {
+      "at": 547,
+      "kind": "printer_status",
+      "device": "p01",
+      "local_id": "machine-873",
+      "state": "jammed"
+    },
+    {
+      "at": 548,
+      "kind": "offline",
+      "device": "p01"
+    },
+    {
+      "at": 550,
+      "kind": "scan",
+      "desk": "south",
+      "serial": "N-40-2",
+      "edition": 1
+    },
+    {
+      "at": 551,
+      "kind": "void",
+      "desk": "south",
+      "serial": "N-40-2",
+      "edition": 1,
+      "reason": "油墨遮挡编号"
+    },
+    {
+      "at": 552,
+      "kind": "replace",
+      "desk": "south",
+      "serial": "N-40-2"
+    },
+    {
+      "at": 558,
+      "kind": "reconnect",
+      "device": "p01"
+    },
+    {
+      "at": 559,
+      "kind": "printer_status",
+      "device": "p01",
+      "local_id": "machine-873",
+      "state": "not_printed",
+      "range": [
+        5,
+        6
+      ]
+    },
+    {
+      "at": 560,
+      "kind": "printer_status",
+      "device": "p01",
+      "local_id": "machine-873",
+      "state": "printed",
+      "range": [
+        2,
+        4
+      ]
+    },
+    {
+      "at": 561,
+      "kind": "scan",
+      "desk": "south",
+      "serial": "N-40-2",
+      "edition": 1
+    }
+  ],
+  "exchanges": [
+    {
+      "method": "POST",
+      "path": "/printers/p01/jobs",
+      "match": {
+        "group": "rk8",
+        "kind": "voucher"
+      },
+      "status": 202,
+      "response": {
+        "state": "received",
+        "local_id": "machine-873"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/printers/p02/jobs",
+      "match": {
+        "group": "rk8",
+        "kind": "luggage"
+      },
+      "status": 202,
+      "response": {
+        "state": "received",
+        "local_id": "machine-911"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/printers/p03/jobs",
+      "match": {
+        "group": "rk8",
+        "kind": "voucher",
+        "range": [
+          2,
+          2
+        ]
+      },
+      "status": 202,
+      "response": {
+        "state": "received",
+        "local_id": "machine-920"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/printers/p03/jobs",
+      "match": {
+        "group": "rk8",
+        "kind": "voucher",
+        "range": [
+          5,
+          6
+        ]
+      },
+      "status": 202,
+      "response": {
+        "state": "received",
+        "local_id": "machine-922"
+      }
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "facts": {
+    "printers": [
+      {
+        "id": "p11",
+        "desk": "east",
+        "media": [
+          "A6"
+        ],
+        "layouts": [
+          "voucher"
+        ],
+        "known": true
+      },
+      {
+        "id": "p12",
+        "desk": "east",
+        "media": [
+          "A6"
+        ],
+        "layouts": [
+          "voucher"
+        ],
+        "known": true
+      }
+    ],
+    "registration_types": {
+      "school": [
+        {
+          "kind": "voucher",
+          "media": "A6",
+          "per_member": 1
+        }
+      ]
+    }
+  },
+  "events": [
+    {
+      "at": 660,
+      "kind": "register",
+      "group": "sg5",
+      "type": "school",
+      "count": 4,
+      "desk": "east",
+      "prefix": "E-23"
+    },
+    {
+      "at": 661,
+      "kind": "restart",
+      "node": "dispatch"
+    },
+    {
+      "at": 662,
+      "kind": "register",
+      "group": "sg6",
+      "type": "school",
+      "count": 2,
+      "desk": "east",
+      "prefix": "E-24"
+    },
+    {
+      "at": 663,
+      "kind": "scan",
+      "desk": "east",
+      "serial": "E-23-1",
+      "edition": 1
+    },
+    {
+      "at": 666,
+      "kind": "printer_status",
+      "device": "p11",
+      "local_id": "machine-z",
+      "state": "printed",
+      "range": [
+        1,
+        2
+      ]
+    }
+  ],
+  "exchanges": [
+    {
+      "method": "POST",
+      "path": "/printers/p11/jobs",
+      "match": {
+        "group": "sg5"
+      },
+      "status": 202,
+      "response": {
+        "state": "received",
+        "local_id": "machine-z"
+      },
+      "drop": true
+    },
+    {
+      "method": "POST",
+      "path": "/printers/p12/jobs",
+      "match": {
+        "group": "sg6"
+      },
+      "status": 202,
+      "response": {
+        "state": "received",
+        "local_id": "machine-a"
+      }
+    }
+  ]
+}
